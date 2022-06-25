@@ -1,8 +1,13 @@
-import styles from '../styles/home.module.css';
+import Head from 'next/head';
 
 export default function Home() {
   return (
-    <div >xx
-    </div>
-  )
+    <>
+    <Head>
+      <title>Inicio | ig.news</title>
+    </Head>
+    <h1 >Hello <span>World</span>
+    </h1>
+    </>
+    )
 }

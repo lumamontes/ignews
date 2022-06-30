@@ -35,6 +35,12 @@ export default function Home({product}: HomeProps) {
   )
 }
 
+//Geração de página estática, que será mostrada por todos os usuários 
+//Utilizar somente em páginas que o conteúdo é o mesmo para todos os usuarios
+
+//Client-side
+//Server-side
+//Static side generation
 
 export const getStaticProps: GetStaticProps = async () => {
   const price = await stripe.prices.retrieve('price_1LFTTiBjzKnNz4ZIrN6aqTux', {
@@ -48,10 +54,9 @@ export const getStaticProps: GetStaticProps = async () => {
     }).format(price.unit_amount / 100)
   }
   return {
-   props: {
-    product
-   },
-   revalidade: 60 * 60 * 24 // 24 horas 
-   //quando tempo em segundos essa página deve se manter sem ser reconstruída
- }
+    props: {
+      product,
+      revalidade : 60 * 60 * 24
+    },
+  }
 }

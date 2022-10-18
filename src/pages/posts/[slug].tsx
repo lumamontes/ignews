@@ -1,5 +1,4 @@
-import { GetServerSideProps } from "next"
-import { getSession } from "next-auth/react";
+import { GetStaticProps } from "next"
 import Head from "next/head";
 import { RichText } from "prismic-dom";
 import { client } from "../../services/prismic";
@@ -38,17 +37,14 @@ export default function Post({ post }: PostProps) {
     )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
-    const session = await getSession({ req });
-    if(!session.activeSubscription){
-        return {
-            redirect: {
-                destination: '/',
-                permanent: false
-            }
-        }
+export const getStaticPaths = () => {
+    return {
+        paths: [],
+        fallback: 'blocking'
     }
+}
 
+export const getStaticProps: GetStaticProps = async ({ params }) => {
     const { slug } = params;
     const response = await client.getByUID('post', String(slug))
     const post = {
